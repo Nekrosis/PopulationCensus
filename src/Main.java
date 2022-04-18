@@ -26,16 +26,10 @@ public class Main {
                 .map(Person::getFamily);
         System.out.println(conscript.collect(Collectors.toList()));
         Stream<Person> workableWoman = persons.stream()
-                .filter(person -> person.getAge() > 18 && person.getAge() < 60)
-                .filter(person -> person.getSex() == Sex.WOMAN)
+                .filter(person -> person.getAge() > 18 && person.getAge() < 60 && person.getSex() == Sex.WOMAN
+                        || person.getAge() < 65 && person.getSex() == Sex.MAN)
                 .filter(person -> person.getEducation() == Education.HIGHER)
                 .sorted((Comparator.comparing(Person::getFamily)));
         System.out.println(workableWoman.collect(Collectors.toList()));
-        Stream<Person> workableMan = persons.stream()
-                .filter(person -> person.getAge() > 18 && person.getAge() < 65)
-                .filter(person -> person.getSex() == Sex.MAN)
-                .filter(person -> person.getEducation() == Education.HIGHER)
-                .sorted(Comparator.comparing(Person::getFamily));
-        System.out.println(workableMan.collect(Collectors.toList()));
     }
 }
